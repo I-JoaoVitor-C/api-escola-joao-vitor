@@ -53,4 +53,48 @@ router.post('/', (req, res) => {
     res.status(201).json(novaNota);
 });
 
+// Rota PUT/:id, para atualizar uma nota que já existe.
+router.put('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const { alunoId, disciplina, nota } = req.body;
+    
+    let notas = readData();
+    const index = notas.findIndex(n => n.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ erro: "Nota não encontrada" });
+    }
+
+    // ↓ Validação para verificar se o alunoId (se enviado) existe.
+    if (alunoId) {
+        const alunos = readAlunos();
+        const alunoExiste = alunos.some(a => a.id === parseInt(alunoId));
+        if (!alunoExiste) {
+            return res.status(404).json({ erro: "Não é possível atualizar: Aluno não encontrado." });
+        }
+    }
+
+    notas[index] = {
+        ...notas[index],
+        alunoId: alunoId ? parseInt(alunoId) : notas[index].alunoId,
+        disciplina: disciplina || notas[index].disciplina,
+        nota: nota !== undefined ? parseFloat(nota) : notas[index].nota
+    };
+
+    writeData(notas);
+    res.json(notas[index]);
+});
+
+router.delete('/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    let notas = readData();
+    const novaLista = notas.filter(n => n.id !== id);
+
+    if (notas.length === novaLista.length) {
+        return res.status(404).json({ erro: "Nota não encontrada" });
+    }
+
+    writeData(novaLista);
+    res.json({ mensagem: "Nota removida com sucesso" });
+});
 module.exports = router;

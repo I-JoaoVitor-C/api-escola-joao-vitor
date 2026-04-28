@@ -2,20 +2,21 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-// ↓ Middlewares obrigatórios.
+// ↓ Configurar Middlewares.
+app.use(express.json()); 
+app.use(express.static('public')); // Serve os arquivos da pasta public/ [cite: 74]
+
+// ↓ Importar e usar as rotas.
 const notasRoutes = require('./routes/notas');
 const alunosRoutes = require('./routes/alunos');
-app.use(express.json()); // ← Permite receber dados no corpo das requisições POST e PUT. 
-app.use(express.static('public')); // ← Serve os arquivos estáticos (Front-End) da pasta public/.
+
+app.use('/alunos', alunosRoutes);
+app.use('/notas', notasRoutes);
 
 // ↓ Rota de teste.
 app.get('/status', (req, res) => {
     res.json({ mensagem: "API da Escola rodando perfeitamente!" });
 });
-
-
-app.use('/alunos', alunosRoutes);
-app.use('/notas', notasRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

@@ -10,11 +10,5 @@
     "alunoId": 2,
     "disciplina": "Backend",
     "nota": 10
-  },
-  {
-    "id": 3,
-    "alunoId": 2,
-    "disciplina": "Mobile",
-    "nota": 10
   }
 ]

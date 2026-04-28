@@ -1,0 +1,116 @@
+/* ↓ Configurações Gerais. */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8f9; /* Branco levemente ciano */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #008b8b; /* Ciano Escuro */
+    border-bottom: 3px solid #00ced1; /* Ciano Vibrante */
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #005f5f;
+    margin-top: 0;
+}
+
+/* ↓ Seções e Cartões. */
+section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ↓ Formulários. */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #b2ebf2;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00ced1;
+    box-shadow: 0 0 5px rgba(0, 206, 209, 0.3);
+}
+
+/* ↓ Botões. */
+button {
+    cursor: pointer;
+    background-color: #00ced1;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #008b8b;
+}
+
+button[onclick*="remover"] {
+    background-color: #ff6b6b; /* Vermelho para excluir */
+}
+
+button[onclick*="remover"]:hover {
+    background-color: #c0392b;
+}
+
+/* ↓ Tabelas. */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background-color: #00ced1;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #e0f7f8;
+}
+
+tr:hover {
+    background-color: #f1fcfd;
+}
+
+/* ↓ Feedback Visual (Mensagens) */
+#mensagem {
+    grid-column: span 2;
+    font-weight: bold;
+    text-align: center;
+    min-height: 20px;
+    margin-top: 10px;
+}
+
+/* ↓ Ajustes Responsivos */
+@media (max-width: 600px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+}

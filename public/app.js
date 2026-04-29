@@ -10,11 +10,14 @@ const mensagemDiv = document.getElementById('mensagem');
 
 // ↓ Exibe feedback visual para o usuário (depende do id da div do html).
 function exibirMensagem(texto, idAlvo, erro = false) {
-    const elemento = document.getElementById(idAlvo);
-    elemento.innerText = texto;
-    elemento.style.color = erro ? '#d9534f' : '#5cb85c';
-    // ↓ Limpa a mensagem após 3 segundos.
-    setTimeout(() => elemento.innerText = '', 3000);
+    const elemento = document.getElementById(idAlvo); // Aqui ele busca o ID que você passa
+    if (elemento) {
+        elemento.innerText = texto;
+        elemento.style.color = erro ? '#d9534f' : '#5cb85c';
+        setTimeout(() => elemento.innerText = '', 3000);
+    } else {
+        console.error("ID não encontrado:", idAlvo); // Isso te ajuda a debugar!
+    }
 }
 
 // ↓ Reseta o formulário de alunos.
@@ -22,7 +25,7 @@ function resetarFormAluno() {
     formAluno.reset();
     alunoEmEdicao = null;
     const btn = document.querySelector('#form-aluno button');
-    btn.innerText = 'Cadastrar Aluno';
+    btn.innerText = 'Cadastrar';
     btn.style.backgroundColor = ''; 
 }
 
@@ -31,7 +34,7 @@ function resetarFormNota() {
     formNota.reset();
     notaEmEdicao = null;
     const btn = document.querySelector('#form-nota button');
-    btn.innerText = 'Salvar Nota';
+    btn.innerText = 'Lançar';
     btn.style.backgroundColor = '';
 }
 
@@ -105,7 +108,7 @@ function prepararEdicaoAluno(id, nome, turma, idade) {
     document.getElementById('idade').value = idade;
     
     const btn = document.querySelector('#form-aluno button');
-    btn.innerText = 'Salvar Alterações';
+    btn.innerText = 'Atualizar';
     btn.style.backgroundColor = '#f0ad4e';
 }
 
@@ -172,7 +175,7 @@ formNota.addEventListener('submit', async (e) => {
             listarNotas();
         } else {
             const erroData = await response.json();
-            exibirMensagem(erroData.erro || 'Erro ao salvar nota', 'mensagem, nota', true);
+            exibirMensagem(erroData.erro || 'Erro ao salvar nota', 'mensagem-nota', true);
         }
     } catch (error) { exibirMensagem('Erro de conexão', 'mensagem-nota', true); }
 });
@@ -185,7 +188,7 @@ function prepararEdicaoNota(id, alunoId, disciplina, valor) {
     document.getElementById('valor-nota').value = valor;
     
     const btn = document.querySelector('#form-nota button');
-    btn.innerText = 'Atualizar Nota';
+    btn.innerText = 'Atualizar';
     btn.style.backgroundColor = '#f0ad4e';
 }
 

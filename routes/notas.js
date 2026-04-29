@@ -26,26 +26,36 @@ router.get('/', (req, res) => {
     res.json(readData());
 });
 
-// ↓ Rota POST/, serve para criar nota (deve validar se alunoId existe).
+// ↓ Rota POST/, serve para criar nota com restrição de valores (0 a 10), validando se alunoId existe.
 router.post('/', (req, res) => {
     const { alunoId, disciplina, nota } = req.body;
+
+    // ↓ Validação de campos obrigatórios
     if (!alunoId || !disciplina || nota === undefined) {
         return res.status(400).json({ erro: "Campos obrigatórios: alunoId, disciplina e nota" });
     }
 
+    // ↓ Restrição de valores da nota (apenas entre 0 e 10).
+    const valorNota = parseFloat(nota);
+    if (isNaN(valorNota) || valorNota < 0 || valorNota > 10) {
+        return res.status(400).json({ erro: "A nota deve ser um número entre 0 e 10." });
+    }
+
+    // ↓ Validação se o aluno existe.
     const alunos = readAlunos();
     const alunoExistente = alunos.some(a => a.id === parseInt(alunoId));
 
     if (!alunoExistente) {
-        return res.status(404).json({erro: "Não é possível lançar a nota: Aluno não encontrado."})
+        return res.status(404).json({ erro: "Não é possível lançar a nota: Aluno não encontrado." });
     }
 
+    // ↓ Persistência no arquivo notas.json.
     const notas = readData();
     const novaNota = {
         id: notas.length > 0 ? Math.max(...notas.map(n => n.id)) + 1 : 1,
         alunoId: parseInt(alunoId),
         disciplina,
-        nota: parseFloat(nota)
+        nota: valorNota
     };
 
     notas.push(novaNota);
@@ -53,7 +63,7 @@ router.post('/', (req, res) => {
     res.status(201).json(novaNota);
 });
 
-// Rota PUT/:id, para atualizar uma nota que já existe.
+// ↓ Rota PUT/:id, serve para atualizar uma nota que já existe.
 router.put('/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const { alunoId, disciplina, nota } = req.body;
@@ -63,6 +73,14 @@ router.put('/:id', (req, res) => {
 
     if (index === -1) {
         return res.status(404).json({ erro: "Nota não encontrada" });
+    }
+
+    // ↓ Validação da Nota (Apenas se for enviada no corpo da requisição)
+    if (nota !== undefined) {
+        const valorNota = parseFloat(nota);
+        if (isNaN(valorNota) || valorNota < 0 || valorNota > 10) {
+            return res.status(400).json({ erro: "A nota deve ser um número entre 0 e 10." });
+        }
     }
 
     // ↓ Validação para verificar se o alunoId (se enviado) existe.
@@ -84,6 +102,8 @@ router.put('/:id', (req, res) => {
     writeData(notas);
     res.json(notas[index]);
 });
+
+// ↓ Rota DELETE/:id, serve para deletar nota pelo id.
 
 router.delete('/:id', (req, res) => {
     const id = parseInt(req.params.id);

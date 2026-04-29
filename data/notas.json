@@ -10,5 +10,29 @@
     "alunoId": 2,
     "disciplina": "Backend",
     "nota": 10
+  },
+  {
+    "id": 3,
+    "alunoId": 3,
+    "disciplina": "Backend",
+    "nota": 10
+  },
+  {
+    "id": 4,
+    "alunoId": 4,
+    "disciplina": "Backend",
+    "nota": 10
+  },
+  {
+    "id": 5,
+    "alunoId": 5,
+    "disciplina": "Backend",
+    "nota": 10
+  },
+  {
+    "id": 6,
+    "alunoId": 2,
+    "disciplina": "Desenvolvimento",
+    "nota": 10
   }
 ]

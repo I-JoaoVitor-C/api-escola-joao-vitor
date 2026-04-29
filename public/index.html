@@ -12,9 +12,19 @@
         <h2>Cadastrar/Editar Aluno</h2>
         <form id="form-aluno">
             <input type="text" id="nome" placeholder="Nome do Aluno" required>
-            <input type="text" id="turma" placeholder="Turma (ex: 3DAM1)" required>
-            <input type="number" id="idade" placeholder="Idade" required>
-            <button type="submit">Cadastrar</button>
+            <input type="text" id="turma" list="turmas-sugeridas" placeholder="Turma (ex: 3DAM1)" required>
+            <datalist id="turmas-sugeridas">
+                <option value="3DAM1">
+                <option value="2FAM1">
+                <option value="1DAT1">
+                <option value="3CAM1">
+                <option value="3JAM1">
+            </datalist>
+            <input type="number" id="idade" min="14" max="120" placeholder="Idade" required>
+            <div class="butoes-container">
+                <button type="submit">Cadastrar</button>
+                <button type="button" onclick="resetarFormAluno()">Cancelar</button>
+            </div>
         </form>
         <div id="mensagem-aluno"></div> 
     </section>
@@ -44,14 +54,17 @@
             <input type="number" id="nota-alunoId" placeholder="ID do Aluno" required>
             <input type="text" id="disciplina" placeholder="Disciplina" required>
             <input type="number" step="0.1" id="valor-nota" placeholder="Nota (0-10)" required>
-            <button type="submit">Salvar Nota</button>
-            <button type="button" onclick="resetarFormNota()">Cancelar</button>
+            <div class="butoes-container">   
+                <button type="submit">Lançar</button>
+                <button type="button" onclick="resetarFormNota()">Cancelar</button>
+            </div>
         </form>
         <div id="mensagem-nota"></div>
     </section>
 
     <section>
         <h2>Lista de Notas</h2>
+        <button onclick="listarAlunos()">Atualizar Lista</button>
         <table border="1" id="tabela-notas">
             <thead>
                 <tr>

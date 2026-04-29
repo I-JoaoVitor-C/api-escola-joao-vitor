@@ -48,12 +48,20 @@ router.get ('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const { nome, turma, idade } = req.body;
     const alunos = readData();
-
+    
     // ↓ Validação de dados obrigatórios.
     if (!nome || !turma || !idade) {
         return res.status(400).json({ erro: "Todos os campos (nome, turma, idade) são obrigatórios" });
     }
 
+    // ↓ Validação para que idade não seja negativa e não ultrapasse dos 120.
+    const idadeNum = parseInt(idade);
+
+    if (isNaN(idadeNum) || idadeNum < 14 || idadeNum > 120) {
+        return res.status(400).json({ erro: "Por favor, insira uma idade válida (entre 1 e 120)." });
+    }
+
+    // ↓ Persistencia para se escrever no arquivo alunos.json.
     const novoAluno = {
         id: alunos.length > 0 ? Math.max(...alunos.map(a => a.id)) + 1 : 1, // ← ID gerado automaticamente.
         nome,
@@ -73,8 +81,16 @@ router.put('/:id', (req, res) => {
     const alunos = readData();
     const index = alunos.findIndex(a => a.id === id);
 
+    // ↓ Validação para quando não se encontrar o Id, retornar esse erro.
     if (index === -1) {
         return res.status(404).json({ erro: "Aluno não encontrado para atualização" });
+    }
+
+    // ↓ Validação para que idade não seja negativa e não ultrapasse dos 120.
+    const idadeNum = parseInt(idade);
+
+    if (isNaN(idadeNum) || idadeNum < 14 || idadeNum > 120) {
+        return res.status(400).json({ erro: "Por favor, insira uma idade válida (entre 1 e 120)." });
     }
 
     // ↓ Atualiza apenas os campos enviados ou mantém os atuais.

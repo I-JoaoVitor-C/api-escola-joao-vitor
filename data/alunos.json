@@ -3,19 +3,19 @@
     "id": 1,
     "nome": "Eduardo Luiz",
     "turma": "3DAM1",
-    "idade": 17
+    "idade": 16
   },
   {
     "id": 2,
     "nome": "João Vitor",
     "turma": "3DAM1",
-    "idade": 17
+    "idade": 16
   },
   {
     "id": 3,
     "nome": "Leonardo Rodrigues",
     "turma": "3DAM1",
-    "idade": 17
+    "idade": 16
   },
   {
     "id": 4,
@@ -27,12 +27,6 @@
     "id": 5,
     "nome": "Reinaldo José",
     "turma": "3DAM1",
-    "idade": 17
-  },
-  {
-    "id": 6,
-    "nome": "João Paulo",
-    "turma": "3CAM1",
     "idade": 17
   }
 ]

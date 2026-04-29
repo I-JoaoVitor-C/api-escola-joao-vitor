@@ -53,6 +53,20 @@ input:focus {
 }
 
 /* ↓ Botões. */
+
+.butoes-container {
+    grid-column: sapan 2;
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.butoes-container button {
+    flex: 1;
+    padding: 15px;
+    cursor: pointer;
+}
+
 button {
     cursor: pointer;
     background-color: #00ced1;

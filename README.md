@@ -1,15 +1,15 @@
-"# api-escola-joao-vitor" 
+# api-escola-joao-vitor
 
- # ↓ Sistema de Gestão Escolar 
+# ↓ Sistema de Gestão Escolar 
 
 Este projeto é uma API desenvolvida em Node.js com Express para gerenciar alunos e suas respectivas notas, utilizando persistência de dados em arquivos JSON. A interface foi construída com HTML, CSS e Fetch API para uma experiência completa de usuário.
 
 ## ↓ Tecnologias Usadas
 
-Node.js: Ambiente de execução;
-Express: Framework para criação de rotas e servidor;
-File System (fs): Manipulação e persistência de arquivos JSON;
-HTML/CSS/JS: Interface e consumo da API via Fetch.
+* Node.js: Ambiente de execução;
+* Express: Framework para criação de rotas e servidor;
+* File System (fs): Manipulação e persistência de arquivos JSON;
+* HTML/CSS/JS: Interface e consumo da API via Fetch.
 
 ## ↓ Como Executar o Projeto
 

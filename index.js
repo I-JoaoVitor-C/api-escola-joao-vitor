@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-// ↓ Configurar Middlewares.
+// ↓ Configurar Middlewares (intermediários).
 app.use(express.json()); 
-app.use(express.static('public')); // Serve os arquivos da pasta public/ [cite: 74]
+app.use(express.static('public')); // ← Serve os arquivos da pasta public/ 
 
 // ↓ Importar e usar as rotas.
 const notasRoutes = require('./routes/notas');

@@ -10,13 +10,13 @@ const mensagemDiv = document.getElementById('mensagem');
 
 // ↓ Exibe feedback visual para o usuário (depende do id da div do html).
 function exibirMensagem(texto, idAlvo, erro = false) {
-    const elemento = document.getElementById(idAlvo); // Aqui ele busca o ID que você passa
+    const elemento = document.getElementById(idAlvo); // ← Aqui ele busca o ID que vc passa.
     if (elemento) {
         elemento.innerText = texto;
         elemento.style.color = erro ? '#d9534f' : '#5cb85c';
         setTimeout(() => elemento.innerText = '', 3000);
     } else {
-        console.error("ID não encontrado:", idAlvo); // Isso te ajuda a debugar!
+        console.error("ID não encontrado:", idAlvo); // ← Serve para debug.
     }
 }
 
@@ -118,7 +118,7 @@ async function removerAluno(id) {
     try {
         const response = await fetch(`/alunos/${id}`, { method: 'DELETE' });
         if (response.ok) {
-            exibirMensagem('Aluno removido!');
+            exibirMensagem('Aluno removido!', 'mensagem-aluno');
             listarAlunos();
         }
     } catch (error) { exibirMensagem('Erro ao excluir', true); }

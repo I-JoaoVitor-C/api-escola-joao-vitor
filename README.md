@@ -75,7 +75,6 @@ Então você copiara essa url e colará no seu navegador (seja Chrome, Microsoft
 | **PUT** | `/notas/:id` | Atualiza as informações de uma nota específica (mantém as validações). |
 | **DELETE** | `/notas/:id` | Remove uma nota do sistema permanentemente. |
 
-————————————————————————————————————————————————————————————————————
 
 ### IV. Extra (Funcionalidades e Boas Práticas)
 
